@@ -29,9 +29,12 @@ export default function Register() {
     async function fetchRoles() {
       try {
         const res = await api.get('/auth/roles');
-        setRoles(res.data);
-        if (res.data.length > 0) {
-          setRoleId(res.data[0].role_id.toString());
+        const visibleRoles = res.data.filter((role) => Number(role.role_id) !== 1);
+        setRoles(visibleRoles);
+        if (visibleRoles.length > 0) {
+          setRoleId(visibleRoles[0].role_id.toString());
+        } else {
+          setRoleId('');
         }
       } catch (err) {
         console.error(err);
