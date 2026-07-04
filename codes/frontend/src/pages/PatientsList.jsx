@@ -1,10 +1,14 @@
+import './PatientsList.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import api from '../api/client';
 import { Loading, Empty, TypeBadge, fmtDate } from '../components/UI';
+import { useAuth } from '../context/AuthContext';
+import { PERMISSIONS } from '../config/rbac';
 
 export default function PatientsList() {
+  const { hasPermission } = useAuth();
   const [patients, setPatients] = useState(null);
   const [search, setSearch] = useState('');
   const [error, setError] = useState('');
@@ -28,7 +32,9 @@ export default function PatientsList() {
       <div className="card">
         <div className="card-header">
           <h3>Patient / Deceased Records {patients ? `(${patients.length})` : ''}</h3>
-          <Link to="/patients/new" className="btn btn-primary btn-sm">+ Register Patient</Link>
+          {hasPermission(PERMISSIONS.PATIENT_CREATE) && (
+            <Link to="/patients/new" className="btn btn-primary btn-sm">+ Register Patient</Link>
+          )}
         </div>
         <div className="card-body">
           {error && <div className="alert alert-danger">{error}</div>}
@@ -77,7 +83,9 @@ export default function PatientsList() {
                       <td>{fmtDate(p.registered_date)}</td>
                       <td>
                         <Link to={`/patients/${p.patient_id}`} className="btn btn-sm btn-outline">View</Link>{' '}
-                        <Link to={`/patients/${p.patient_id}/edit`} className="btn btn-sm btn-secondary">Edit</Link>
+                        {hasPermission(PERMISSIONS.PATIENT_UPDATE) && (
+                          <Link to={`/patients/${p.patient_id}/edit`} className="btn btn-sm btn-secondary">Edit</Link>
+                        )}
                       </td>
                     </tr>
                   ))}

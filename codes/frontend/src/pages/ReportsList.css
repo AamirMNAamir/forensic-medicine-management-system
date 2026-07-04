@@ -1,0 +1,101 @@
+/* ============================================================
+   ReportsList.css
+   ============================================================ */
+
+.reports-list {}
+
+.reports-list__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.reports-list__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbfc;
+}
+
+.reports-list__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.reports-list__body {
+  padding: 1.25rem;
+}
+
+.reports-list__table-wrap {
+  overflow-x: auto;
+}
+
+.reports-list__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.reports-list__table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.7rem 1rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.reports-list__table tbody td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  color: #1a2533;
+}
+
+.reports-list__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reports-list__table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.reports-list__table a {
+  color: #328CC1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.reports-list__table a:hover {
+  color: #0B3C5D;
+  text-decoration: underline;
+}
+
+.reports-list__view-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.65rem;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent;
+  color: #0B3C5D;
+  border: 1.5px solid #0B3C5D;
+  transition: all 0.15s;
+}
+
+.reports-list__view-btn:hover {
+  background: #0B3C5D;
+  color: #fff;
+}

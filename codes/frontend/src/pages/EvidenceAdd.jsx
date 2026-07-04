@@ -1,3 +1,4 @@
+import './EvidenceAdd.css';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';

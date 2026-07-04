@@ -1,3 +1,4 @@
+import './PatientEdit.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../components/Layout';

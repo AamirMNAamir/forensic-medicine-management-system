@@ -1,12 +1,16 @@
+import './ReportView.css';
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import api from '../api/client';
 import { Loading, StatusBadge, fmtDate } from '../components/UI';
+import { useAuth } from '../context/AuthContext';
+import { PERMISSIONS } from '../config/rbac';
 
 const STATUSES = ['Draft', 'Issued', 'Dispatched'];
 
 export default function ReportView() {
+  const { hasPermission } = useAuth();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const [report, setReport] = useState(null);
@@ -49,14 +53,16 @@ export default function ReportView() {
         <div className="card-header">
           <h3>{report.report_type} — {report.case_ref_no}</h3>
           <div className="flex gap-1 items-center">
-            <form onSubmit={handleStatusUpdate} className="flex gap-1 items-center">
-              <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)} style={{ maxWidth: 140 }}>
-                {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
-              </select>
-              <button type="submit" className="btn btn-sm btn-secondary" disabled={updating}>
-                {updating ? '...' : 'Update'}
-              </button>
-            </form>
+            {hasPermission(PERMISSIONS.REPORT_APPROVE) && (
+              <form onSubmit={handleStatusUpdate} className="flex gap-1 items-center">
+                <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)} style={{ maxWidth: 140 }}>
+                  {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+                </select>
+                <button type="submit" className="btn btn-sm btn-secondary" disabled={updating}>
+                  {updating ? '...' : 'Update'}
+                </button>
+              </form>
+            )}
             <button className="btn btn-sm btn-outline" onClick={() => window.print()}>Print</button>
           </div>
         </div>

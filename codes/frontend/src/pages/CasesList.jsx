@@ -1,12 +1,16 @@
+import './CasesList.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import api from '../api/client';
 import { Loading, Empty, StatusBadge, TypeBadge, fmtDate } from '../components/UI';
+import { useAuth } from '../context/AuthContext';
+import { PERMISSIONS } from '../config/rbac';
 
 const STATUSES = ['Open', 'Pending Report', 'Report Issued', 'Closed'];
 
 export default function CasesList() {
+  const { hasPermission } = useAuth();
   const [cases, setCases] = useState(null);
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('');
@@ -40,7 +44,9 @@ export default function CasesList() {
       <div className="card">
         <div className="card-header">
           <h3>Investigation Cases {cases ? `(${cases.length})` : ''}</h3>
-          <Link to="/cases/new" className="btn btn-primary btn-sm">+ New Case</Link>
+          {hasPermission(PERMISSIONS.CASE_CREATE) && (
+            <Link to="/cases/new" className="btn btn-primary btn-sm">+ New Case</Link>
+          )}
         </div>
         <div className="card-body">
           {error && <div className="alert alert-danger">{error}</div>}

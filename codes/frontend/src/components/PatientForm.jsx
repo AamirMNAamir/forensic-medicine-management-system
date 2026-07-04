@@ -1,3 +1,4 @@
+import './PatientForm.css';
 import { useState } from 'react';
 
 const EMPTY = {

@@ -1,3 +1,4 @@
+import './Login.css';
 import { useState } from 'react';
 import { useNavigate, Navigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -8,6 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -22,7 +24,7 @@ export default function Login() {
     }
     setSubmitting(true);
     try {
-      await login(username, password);
+      await login(username, password, rememberMe);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.error || 'Invalid username or password.');
@@ -70,15 +72,29 @@ export default function Login() {
                 required
               />
             </div>
+            <div className="form-group" style={{ flexDirection: 'row', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+              <input
+                type="checkbox"
+                id="rememberMe"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                style={{ width: 'auto', height: 'auto', cursor: 'pointer' }}
+              />
+              <label htmlFor="rememberMe" style={{ textTransform: 'none', cursor: 'pointer', margin: 0, fontSize: 13 }}>
+                Remember Me
+              </label>
+            </div>
             <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? 'Signing in...' : 'Log In'}
             </button>
           </form>
-          <p className="text-sm text-muted mt-2">
-            Demo credentials: <strong>admin</strong> / <strong>admin123</strong>
+          
+          <p className="text-sm text-muted mt-2 text-center">
+            Don't have an account? <Link to="/register"><strong>Sign Up</strong></Link>
           </p>
-          <p className="text-sm mt-3 text-center">
-            Don't have an account? <Link to="/signup" style={{ fontWeight: '600' }}>Sign Up</Link>
+
+          <p className="text-sm text-muted mt-2 text-center" style={{ fontSize: 11 }}>
+            Demo credentials: <strong>admin</strong> / <strong>admin123</strong>
           </p>
         </div>
       </div>

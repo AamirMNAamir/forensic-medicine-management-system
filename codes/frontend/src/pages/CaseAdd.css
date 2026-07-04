@@ -1,0 +1,135 @@
+/* ============================================================
+   CaseAdd.css
+   ============================================================ */
+
+.case-add {
+  max-width: 1000px;
+}
+
+.case-add__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.case-add__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  background: #fafbfc;
+}
+
+.case-add__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.case-add__body {
+  padding: 1.5rem 1.25rem;
+}
+
+.case-add__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.case-add__grid--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.case-add__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.case-add__group--span2 {
+  grid-column: span 2;
+}
+
+.case-add__group--span3 {
+  grid-column: span 3;
+}
+
+.case-add__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7a8d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.case-add__label .req {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+.case-add__input,
+.case-add__select,
+.case-add__textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  background: #fff;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.case-add__input:focus,
+.case-add__select:focus,
+.case-add__textarea:focus {
+  outline: none;
+  border-color: #328CC1;
+  box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+}
+
+.case-add__textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.case-add__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.case-add__submit-btn {
+  padding: 0.55rem 1.25rem;
+  background: #0B3C5D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.case-add__submit-btn:hover:not(:disabled) {
+  background: #072d45;
+}
+
+.case-add__submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .case-add__grid,
+  .case-add__grid--3 {
+    grid-template-columns: 1fr;
+  }
+  .case-add__group--span2,
+  .case-add__group--span3 {
+    grid-column: span 1;
+  }
+}

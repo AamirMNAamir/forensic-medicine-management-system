@@ -1,3 +1,4 @@
+import './Topbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
@@ -7,7 +8,6 @@ export default function Topbar({ title, breadcrumb }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [unreadCount, setUnreadCount] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -17,22 +17,8 @@ export default function Topbar({ title, breadcrumb }) {
         if (mounted) setUnreadCount(res.data.unreadCount || 0);
       })
       .catch(() => {});
-    return () => {
-      mounted = false;
-    };
+    return () => { mounted = false; };
   }, []);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuOpen && !event.target.closest('.topbar-user')) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [menuOpen]);
 
   function handleLogout() {
     logout();
@@ -62,12 +48,12 @@ export default function Topbar({ title, breadcrumb }) {
           {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
         </Link>
         <div className="topbar-user">
-          <div className="user-chip" onClick={() => setMenuOpen(!menuOpen)}>
+          <div className="user-chip">
             <div className="avatar">{initials}</div>
             <span>{user.full_name}</span>
           </div>
-          <div className={`user-menu ${menuOpen ? 'show' : ''}`}>
-            <Link to="/profile" onClick={() => setMenuOpen(false)}>My Profile</Link>
+          <div className="user-menu">
+            <Link to="/profile">My Profile</Link>
             <button onClick={handleLogout}>Log Out</button>
           </div>
         </div>
@@ -75,4 +61,3 @@ export default function Topbar({ title, breadcrumb }) {
     </header>
   );
 }
-

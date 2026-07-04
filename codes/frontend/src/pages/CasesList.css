@@ -1,0 +1,203 @@
+/* ============================================================
+   CasesList.css
+   ============================================================ */
+
+.cases-list {}
+
+.cases-list__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.cases-list__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbfc;
+}
+
+.cases-list__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.cases-list__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  background: #0B3C5D;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.cases-list__add-btn:hover {
+  background: #072d45;
+  color: #fff;
+}
+
+.cases-list__body {
+  padding: 1.25rem;
+}
+
+/* Filter bar */
+.cases-list__filter {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.cases-list__search-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  width: 280px;
+  font-family: inherit;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.cases-list__search-input:focus {
+  outline: none;
+  border-color: #328CC1;
+  box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+}
+
+.cases-list__status-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  background: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  max-width: 180px;
+  transition: border-color 0.15s;
+}
+
+.cases-list__status-select:focus {
+  outline: none;
+  border-color: #328CC1;
+}
+
+.cases-list__filter-btn,
+.cases-list__clear-btn {
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.cases-list__filter-btn {
+  background: transparent;
+  color: #0B3C5D;
+  border: 1.5px solid #0B3C5D;
+}
+
+.cases-list__filter-btn:hover {
+  background: #0B3C5D;
+  color: #fff;
+}
+
+.cases-list__clear-btn {
+  background: transparent;
+  color: #6b7a8d;
+  border: 1.5px solid #dde3ea;
+}
+
+.cases-list__clear-btn:hover {
+  background: #f0f4f8;
+}
+
+/* Table */
+.cases-list__table-wrap {
+  overflow-x: auto;
+}
+
+.cases-list__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.cases-list__table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.7rem 1rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.cases-list__table tbody td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  color: #1a2533;
+}
+
+.cases-list__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cases-list__table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.cases-list__table a {
+  color: #328CC1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cases-list__table a:hover {
+  color: #0B3C5D;
+  text-decoration: underline;
+}
+
+.cases-list__view-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.65rem;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent;
+  color: #0B3C5D;
+  border: 1.5px solid #0B3C5D;
+  transition: all 0.15s;
+}
+
+.cases-list__view-btn:hover {
+  background: #0B3C5D;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .cases-list__search-input { width: 100%; }
+  .cases-list__status-select { max-width: 100%; }
+}

@@ -1,0 +1,201 @@
+/* ============================================================
+   PolicePage.css
+   ============================================================ */
+
+.police-page {}
+
+.police-page__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.police-page__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.police-page__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbfc;
+}
+
+.police-page__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.police-page__body {
+  padding: 1.25rem;
+}
+
+/* Cases table */
+.police-page__table-wrap {
+  overflow-x: auto;
+}
+
+.police-page__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.police-page__table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.police-page__table tbody td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  color: #1a2533;
+}
+
+.police-page__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.police-page__table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.police-page__table a {
+  color: #328CC1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.police-page__table a:hover {
+  color: #0B3C5D;
+  text-decoration: underline;
+}
+
+/* Stations sub-table */
+.police-page__stations-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 1.25rem;
+}
+
+.police-page__stations-table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+}
+
+.police-page__stations-table tbody td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid #f0f0f0;
+  color: #1a2533;
+}
+
+.police-page__stations-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Add station form */
+.police-page__form-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0B3C5D;
+  margin: 0 0 0.65rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid #e3f0fb;
+}
+
+.police-page__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.65rem;
+}
+
+.police-page__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7a8d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.police-page__label .req {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+.police-page__input {
+  padding: 0.48rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  background: #fff;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.police-page__input:focus {
+  outline: none;
+  border-color: #328CC1;
+  box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+}
+
+.police-page__submit-btn {
+  padding: 0.42rem 0.9rem;
+  background: #0B3C5D;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  margin-top: 0.5rem;
+}
+
+.police-page__submit-btn:hover:not(:disabled) {
+  background: #072d45;
+}
+
+.police-page__submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.police-page__no-cases {
+  font-size: 13px;
+  color: #6b7a8d;
+}
+
+@media (max-width: 768px) {
+  .police-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

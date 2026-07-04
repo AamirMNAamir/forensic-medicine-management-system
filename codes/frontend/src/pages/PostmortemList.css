@@ -1,0 +1,98 @@
+/* ============================================================
+   PostmortemList.css
+   ============================================================ */
+
+.pm-list__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.pm-list__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbfc;
+}
+
+.pm-list__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.pm-list__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  background: #0B3C5D;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.pm-list__add-btn:hover {
+  background: #072d45;
+  color: #fff;
+}
+
+.pm-list__body { padding: 1.25rem; }
+
+.pm-list__table-wrap { overflow-x: auto; }
+
+.pm-list__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.pm-list__table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.7rem 1rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.pm-list__table tbody td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  color: #1a2533;
+}
+
+.pm-list__table tbody tr:last-child td { border-bottom: none; }
+.pm-list__table tbody tr:hover { background: #f8fafc; }
+
+.pm-list__view-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.65rem;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent;
+  color: #0B3C5D;
+  border: 1.5px solid #0B3C5D;
+  transition: all 0.15s;
+}
+
+.pm-list__view-btn:hover {
+  background: #0B3C5D;
+  color: #fff;
+}

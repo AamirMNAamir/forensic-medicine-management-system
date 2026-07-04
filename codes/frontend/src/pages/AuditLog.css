@@ -1,0 +1,116 @@
+/* ============================================================
+   AuditLog.css
+   ============================================================ */
+
+.audit-log {}
+
+.audit-log__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.audit-log__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbfc;
+}
+
+.audit-log__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.audit-log__body {
+  padding: 1.25rem;
+}
+
+.audit-log__table-wrap {
+  overflow-x: auto;
+}
+
+.audit-log__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.audit-log__table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.audit-log__table tbody td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  color: #1a2533;
+}
+
+.audit-log__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.audit-log__table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.audit-log__table .text-muted {
+  color: #6b7a8d;
+}
+
+.audit-log__empty {
+  text-align: center;
+  color: #6b7a8d;
+  padding: 2rem;
+}
+
+/* Login history specific */
+.audit-log__login-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.audit-log__login-table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+}
+
+.audit-log__login-table tbody td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  color: #1a2533;
+}
+
+.audit-log__login-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.audit-log__login-table tbody tr:hover {
+  background: #f8fafc;
+}

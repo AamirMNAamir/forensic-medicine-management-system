@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { PERMISSIONS } from './config/rbac';
 
 import Login from './pages/Login';
-import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 
 import PatientsList from './pages/PatientsList';
@@ -31,6 +31,8 @@ import PolicePage from './pages/PolicePage';
 import Notifications from './pages/Notifications';
 import AuditLog from './pages/AuditLog';
 import Profile from './pages/Profile';
+import UsersList from './pages/UsersList';
+import Register from './pages/Register';
 
 function Protected({ children, roles }) {
   return <ProtectedRoute roles={roles}>{children}</ProtectedRoute>;
@@ -42,35 +44,36 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
           <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
 
-          <Route path="/patients" element={<Protected><PatientsList /></Protected>} />
-          <Route path="/patients/new" element={<Protected><PatientAdd /></Protected>} />
-          <Route path="/patients/:id" element={<Protected><PatientView /></Protected>} />
-          <Route path="/patients/:id/edit" element={<Protected><PatientEdit /></Protected>} />
+          <Route path="/patients" element={<Protected roles={PERMISSIONS.PATIENT_READ}><PatientsList /></Protected>} />
+          <Route path="/patients/new" element={<Protected roles={PERMISSIONS.PATIENT_CREATE}><PatientAdd /></Protected>} />
+          <Route path="/patients/:id" element={<Protected roles={PERMISSIONS.PATIENT_READ}><PatientView /></Protected>} />
+          <Route path="/patients/:id/edit" element={<Protected roles={PERMISSIONS.PATIENT_UPDATE}><PatientEdit /></Protected>} />
 
-          <Route path="/cases" element={<Protected><CasesList /></Protected>} />
-          <Route path="/cases/new" element={<Protected><CaseAdd /></Protected>} />
-          <Route path="/cases/:id" element={<Protected><CaseView /></Protected>} />
+          <Route path="/cases" element={<Protected roles={PERMISSIONS.CASE_READ}><CasesList /></Protected>} />
+          <Route path="/cases/new" element={<Protected roles={PERMISSIONS.CASE_CREATE}><CaseAdd /></Protected>} />
+          <Route path="/cases/:id" element={<Protected roles={PERMISSIONS.CASE_READ}><CaseView /></Protected>} />
 
-          <Route path="/postmortems" element={<Protected><PostmortemList /></Protected>} />
-          <Route path="/postmortems/new" element={<Protected><PostmortemAdd /></Protected>} />
-          <Route path="/postmortems/:id" element={<Protected><PostmortemView /></Protected>} />
+          <Route path="/postmortems" element={<Protected roles={PERMISSIONS.POSTMORTEM_READ}><PostmortemList /></Protected>} />
+          <Route path="/postmortems/new" element={<Protected roles={PERMISSIONS.POSTMORTEM_WRITE}><PostmortemAdd /></Protected>} />
+          <Route path="/postmortems/:id" element={<Protected roles={PERMISSIONS.POSTMORTEM_READ}><PostmortemView /></Protected>} />
 
-          <Route path="/evidence" element={<Protected><EvidenceList /></Protected>} />
-          <Route path="/evidence/new" element={<Protected><EvidenceAdd /></Protected>} />
+          <Route path="/evidence" element={<Protected roles={PERMISSIONS.EVIDENCE_READ}><EvidenceList /></Protected>} />
+          <Route path="/evidence/new" element={<Protected roles={PERMISSIONS.EVIDENCE_WRITE}><EvidenceAdd /></Protected>} />
 
-          <Route path="/reports" element={<Protected><ReportsList /></Protected>} />
-          <Route path="/reports/new" element={<Protected><ReportAdd /></Protected>} />
-          <Route path="/reports/:id" element={<Protected><ReportView /></Protected>} />
+          <Route path="/reports" element={<Protected roles={PERMISSIONS.REPORT_READ}><ReportsList /></Protected>} />
+          <Route path="/reports/new" element={<Protected roles={PERMISSIONS.REPORT_CREATE}><ReportAdd /></Protected>} />
+          <Route path="/reports/:id" element={<Protected roles={PERMISSIONS.REPORT_READ}><ReportView /></Protected>} />
 
-          <Route path="/staff" element={<Protected><StaffList /></Protected>} />
-          <Route path="/police" element={<Protected><PolicePage /></Protected>} />
+          <Route path="/staff" element={<Protected roles={PERMISSIONS.STAFF_READ}><StaffList /></Protected>} />
+          <Route path="/police" element={<Protected roles={PERMISSIONS.POLICE_READ}><PolicePage /></Protected>} />
           <Route path="/notifications" element={<Protected><Notifications /></Protected>} />
-          <Route path="/audit-log" element={<Protected roles={[1, 2]}><AuditLog /></Protected>} />
+          <Route path="/audit-log" element={<Protected roles={PERMISSIONS.AUDIT_READ}><AuditLog /></Protected>} />
+          <Route path="/users" element={<Protected roles={PERMISSIONS.USER_MANAGE}><UsersList /></Protected>} />
           <Route path="/profile" element={<Protected><Profile /></Protected>} />
 
           <Route path="*" element={<Navigate to="/dashboard" replace />} />

@@ -1,3 +1,4 @@
+import './PostmortemView.css';
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';

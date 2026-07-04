@@ -1,0 +1,46 @@
+/* ============================================================
+   Layout.css
+   ============================================================ */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #F0F4F8;
+}
+
+.layout__main {
+  margin-left: 260px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: margin-left 0.25s ease;
+}
+
+.layout__body {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* Mobile overlay */
+.layout__overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+.layout__overlay--visible {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .layout__main {
+    margin-left: 0;
+  }
+
+  .layout__body {
+    padding: 1rem;
+  }
+}

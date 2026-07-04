@@ -1,0 +1,143 @@
+/* ============================================================
+   ReportAdd.css
+   ============================================================ */
+
+.report-add {
+  max-width: 900px;
+}
+
+.report-add__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.report-add__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  background: #fafbfc;
+}
+
+.report-add__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.report-add__body {
+  padding: 1.5rem 1.25rem;
+}
+
+.report-add__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.report-add__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.report-add__group--span2 {
+  grid-column: span 2;
+}
+
+.report-add__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7a8d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.report-add__label .req {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+.report-add__input,
+.report-add__select,
+.report-add__textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  background: #fff;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.report-add__input:focus,
+.report-add__select:focus,
+.report-add__textarea:focus {
+  outline: none;
+  border-color: #328CC1;
+  box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+}
+
+.report-add__textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.report-add__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.report-add__submit-btn {
+  padding: 0.55rem 1.25rem;
+  background: #0B3C5D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.report-add__submit-btn:hover:not(:disabled) {
+  background: #072d45;
+}
+
+.report-add__submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.report-add__cancel-btn {
+  padding: 0.55rem 1.25rem;
+  background: transparent;
+  color: #0B3C5D;
+  border: 1.5px solid #0B3C5D;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.report-add__cancel-btn:hover {
+  background: #0B3C5D;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .report-add__grid {
+    grid-template-columns: 1fr;
+  }
+  .report-add__group--span2 {
+    grid-column: span 1;
+  }
+}

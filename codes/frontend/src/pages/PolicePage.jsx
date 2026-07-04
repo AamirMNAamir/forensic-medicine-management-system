@@ -1,12 +1,14 @@
+import './PolicePage.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { Loading, StatusBadge } from '../components/UI';
+import { PERMISSIONS } from '../config/rbac';
 
 export default function PolicePage() {
-  const { hasRole } = useAuth();
+  const { hasPermission } = useAuth();
   const [stations, setStations] = useState([]);
   const [cases, setCases] = useState([]);
   const [form, setForm] = useState({ station_name: '', district: '', contact_no: '' });
@@ -89,7 +91,7 @@ export default function PolicePage() {
               </table>
             )}
 
-            {hasRole(1, 2) && (
+            {hasPermission(PERMISSIONS.POLICE_WRITE) && (
               <>
                 <h3 style={{ fontSize: 13, color: 'var(--primary)', margin: '.75rem 0 .5rem' }}>Add Police Station</h3>
                 <form onSubmit={handleSubmit}>

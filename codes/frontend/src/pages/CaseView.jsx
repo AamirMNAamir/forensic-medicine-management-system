@@ -1,12 +1,16 @@
+import './CaseView.css';
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import api from '../api/client';
 import { Loading, StatusBadge, TypeBadge, fmtDate } from '../components/UI';
+import { useAuth } from '../context/AuthContext';
+import { PERMISSIONS } from '../config/rbac';
 
 const STATUSES = ['Open', 'Pending Report', 'Report Issued', 'Closed'];
 
 export default function CaseView() {
+  const { hasPermission } = useAuth();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const [caseData, setCaseData] = useState(null);
@@ -57,14 +61,16 @@ export default function CaseView() {
           <h3>
             {c.case_ref_no} &mdash; <TypeBadge type={c.case_type} />
           </h3>
-          <form onSubmit={handleStatusUpdate} className="flex gap-1 items-center">
-            <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)} style={{ maxWidth: 160 }}>
-              {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
-            </select>
-            <button type="submit" className="btn btn-sm btn-secondary" disabled={statusUpdating}>
-              {statusUpdating ? '...' : 'Update Status'}
-            </button>
-          </form>
+          {hasPermission(PERMISSIONS.CASE_STATUS_UPDATE) && (
+            <form onSubmit={handleStatusUpdate} className="flex gap-1 items-center">
+              <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)} style={{ maxWidth: 160 }}>
+                {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+              <button type="submit" className="btn btn-sm btn-secondary" disabled={statusUpdating}>
+                {statusUpdating ? '...' : 'Update Status'}
+              </button>
+            </form>
+          )}
         </div>
         <div className="card-body">
           <div className="grid-3">
@@ -126,9 +132,13 @@ export default function CaseView() {
           <div className="card-header">
             <h3>Postmortem Record</h3>
             {!c.postmortem ? (
-              <Link to={`/postmortems/new?case_id=${id}`} className="btn btn-sm btn-primary">+ Add</Link>
+              hasPermission(PERMISSIONS.POSTMORTEM_WRITE) && (
+                <Link to={`/postmortems/new?case_id=${id}`} className="btn btn-sm btn-primary">+ Add</Link>
+              )
             ) : (
-              <Link to={`/postmortems/${c.postmortem.pm_id}`} className="btn btn-sm btn-outline">View</Link>
+              hasPermission(PERMISSIONS.POSTMORTEM_READ) && (
+                <Link to={`/postmortems/${c.postmortem.pm_id}`} className="btn btn-sm btn-outline">View</Link>
+              )
             )}
           </div>
           <div className="card-body">
@@ -148,7 +158,9 @@ export default function CaseView() {
         <div className="card">
           <div className="card-header">
             <h3>Reports ({c.reports.length})</h3>
-            <Link to={`/reports/new?case_id=${id}`} className="btn btn-sm btn-primary">+ New Report</Link>
+            {hasPermission(PERMISSIONS.REPORT_CREATE) && (
+              <Link to={`/reports/new?case_id=${id}`} className="btn btn-sm btn-primary">+ New Report</Link>
+            )}
           </div>
           <div className="card-body">
             {c.reports.length === 0 && <p className="text-muted text-sm">No reports generated yet.</p>}
@@ -159,7 +171,11 @@ export default function CaseView() {
                 style={{ paddingBottom: '.5rem', borderBottom: '1px solid #f0f0f0' }}
               >
                 <div>
-                  <Link to={`/reports/${r.report_id}`}>{r.report_type}</Link>
+                  {hasPermission(PERMISSIONS.REPORT_READ) ? (
+                    <Link to={`/reports/${r.report_id}`}>{r.report_type}</Link>
+                  ) : (
+                    <span>{r.report_type}</span>
+                  )}
                   <span className="text-sm text-muted"> — {r.report_status}</span>
                 </div>
                 <span className="text-sm text-muted">{fmtDate(r.report_date)}</span>
@@ -174,7 +190,9 @@ export default function CaseView() {
         <div className="card">
           <div className="card-header">
             <h3>Evidence ({c.evidence.length})</h3>
-            <Link to={`/evidence/new?case_id=${id}`} className="btn btn-sm btn-primary">+ Add Evidence</Link>
+            {hasPermission(PERMISSIONS.EVIDENCE_WRITE) && (
+              <Link to={`/evidence/new?case_id=${id}`} className="btn btn-sm btn-primary">+ Add Evidence</Link>
+            )}
           </div>
           <div className="card-body">
             {c.evidence.length === 0 && <p className="text-muted text-sm">No evidence recorded.</p>}

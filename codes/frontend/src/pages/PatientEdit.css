@@ -1,0 +1,33 @@
+/* ============================================================
+   PatientEdit.css
+   ============================================================ */
+
+/* Reuses the same card shell as PatientAdd */
+.patient-edit {
+  max-width: 900px;
+}
+
+.patient-edit__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.patient-edit__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  background: #fafbfc;
+}
+
+.patient-edit__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.patient-edit__body {
+  padding: 1.5rem 1.25rem;
+}

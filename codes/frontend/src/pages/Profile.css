@@ -1,0 +1,171 @@
+/* ============================================================
+   Profile.css
+   ============================================================ */
+
+.profile {}
+
+.profile__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.profile__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.profile__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  background: #fafbfc;
+}
+
+.profile__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.profile__body {
+  padding: 1.25rem;
+}
+
+/* Profile info table */
+.profile__info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.profile__info-table td {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f5f5f5;
+  vertical-align: top;
+}
+
+.profile__info-table tr:last-child td {
+  border-bottom: none;
+}
+
+.profile__info-label {
+  color: #6b7a8d;
+  width: 150px;
+  font-weight: 500;
+  padding-right: 1rem;
+}
+
+.profile__info-value {
+  color: #1a2533;
+  font-weight: 400;
+}
+
+/* Avatar block */
+.profile__avatar-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.profile__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #328CC1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.profile__avatar-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0B3C5D;
+  margin: 0 0 2px;
+}
+
+.profile__avatar-role {
+  font-size: 13px;
+  color: #6b7a8d;
+}
+
+/* Password form */
+.profile__pw-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.profile__pw-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7a8d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile__pw-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  background: #fff;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.profile__pw-input:focus {
+  outline: none;
+  border-color: #328CC1;
+  box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+}
+
+.profile__pw-submit {
+  padding: 0.55rem 1.25rem;
+  background: #0B3C5D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  margin-top: 0.5rem;
+}
+
+.profile__pw-submit:hover:not(:disabled) {
+  background: #072d45;
+}
+
+.profile__pw-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Password strength hint */
+.profile__pw-hint {
+  font-size: 11px;
+  color: #6b7a8d;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .profile__grid {
+    grid-template-columns: 1fr;
+  }
+}

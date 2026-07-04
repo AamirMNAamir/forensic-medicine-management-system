@@ -1,0 +1,136 @@
+/* ============================================================
+   PostmortemAdd.css
+   ============================================================ */
+
+.pm-add {
+  max-width: 1100px;
+}
+
+.pm-add__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.pm-add__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  background: #fafbfc;
+}
+
+.pm-add__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.pm-add__body {
+  padding: 1.5rem 1.25rem;
+}
+
+.pm-add__section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0B3C5D;
+  margin: 1.25rem 0 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid #e3f0fb;
+}
+
+.pm-add__section-title:first-of-type {
+  margin-top: 0;
+}
+
+.pm-add__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.pm-add__grid--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.pm-add__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pm-add__group--span2 {
+  grid-column: span 2;
+}
+
+.pm-add__group--span3 {
+  grid-column: span 3;
+}
+
+.pm-add__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7a8d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pm-add__label .req {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+.pm-add__input,
+.pm-add__select,
+.pm-add__textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  background: #fff;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.pm-add__input:focus,
+.pm-add__select:focus,
+.pm-add__textarea:focus {
+  outline: none;
+  border-color: #328CC1;
+  box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+}
+
+.pm-add__textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.pm-add__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.pm-add__submit-btn {
+  padding: 0.55rem 1.25rem;
+  background: #0B3C5D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.pm-add__submit-btn:hover:not(:disabled) { background: #072d45; }
+.pm-add__submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+@media (max-width: 768px) {
+  .pm-add__grid, .pm-add__grid--3 { grid-template-columns: 1fr; }
+  .pm-add__group--span2, .pm-add__group--span3 { grid-column: span 1; }
+}

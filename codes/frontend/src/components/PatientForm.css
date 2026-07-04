@@ -1,0 +1,111 @@
+/* ============================================================
+   PatientForm.css
+   ============================================================ */
+
+.patient-form {
+  width: 100%;
+}
+
+.patient-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.patient-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.patient-form__group--span2 {
+  grid-column: span 2;
+}
+
+.patient-form__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7a8d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.patient-form__label .req {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+.patient-form__input,
+.patient-form__select,
+.patient-form__textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #1a2533;
+  background: #fff;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.patient-form__input:focus,
+.patient-form__select:focus,
+.patient-form__textarea:focus {
+  outline: none;
+  border-color: #328CC1;
+  box-shadow: 0 0 0 3px rgba(50, 140, 193, 0.15);
+}
+
+.patient-form__textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.patient-form__select {
+  cursor: pointer;
+}
+
+.patient-form__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.patient-form__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+
+.patient-form__btn--primary {
+  background: #0B3C5D;
+  color: #fff;
+}
+
+.patient-form__btn--primary:hover {
+  background: #072d45;
+}
+
+.patient-form__btn--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .patient-form__grid {
+    grid-template-columns: 1fr;
+  }
+  .patient-form__group--span2 {
+    grid-column: span 1;
+  }
+}

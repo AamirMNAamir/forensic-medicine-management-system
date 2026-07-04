@@ -1,0 +1,170 @@
+/* ============================================================
+   UI.css  —  Alert, Loading, Empty, StatusBadge, TypeBadge
+   ============================================================ */
+
+/* ---- Alerts ---- */
+.ui-alert {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 13.5px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ui-alert--success {
+  background: #d4edda;
+  color: #155724;
+  border-left: 4px solid #198754;
+}
+
+.ui-alert--danger {
+  background: #fde8ea;
+  color: #721c24;
+  border-left: 4px solid #dc3545;
+}
+
+.ui-alert--warning {
+  background: #fff3cd;
+  color: #856404;
+  border-left: 4px solid #ffc107;
+}
+
+.ui-alert--info {
+  background: #cff4fc;
+  color: #0a6988;
+  border-left: 4px solid #0dcaf0;
+}
+
+.ui-alert a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ---- Loading ---- */
+.ui-loading {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: #6b7a8d;
+  font-size: 13px;
+}
+
+.ui-loading__spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #dde3ea;
+  border-top-color: #328CC1;
+  border-radius: 50%;
+  animation: ui-spin 0.7s linear infinite;
+  margin: 0 auto 0.75rem;
+}
+
+@keyframes ui-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Empty ---- */
+.ui-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: #6b7a8d;
+  font-size: 13px;
+}
+
+.ui-empty__icon {
+  font-size: 32px;
+  margin-bottom: 0.5rem;
+  opacity: 0.4;
+}
+
+.ui-empty__text {
+  margin: 0;
+}
+
+/* ---- Status Badges ---- */
+.ui-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.65rem;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.ui-badge--open {
+  background: #cff4fc;
+  color: #0a6988;
+}
+
+.ui-badge--pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.ui-badge--issued {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ui-badge--closed {
+  background: #e2e3e5;
+  color: #41464b;
+}
+
+.ui-badge--clinical {
+  background: #e0f0ff;
+  color: #0B3C5D;
+}
+
+.ui-badge--postmortem {
+  background: #fde8ea;
+  color: #dc3545;
+}
+
+.ui-badge--draft {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.ui-badge--dispatched {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ui-badge--active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ui-badge--inactive {
+  background: #e2e3e5;
+  color: #41464b;
+}
+
+.ui-badge--success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ui-badge--failed {
+  background: #fde8ea;
+  color: #721c24;
+}
+
+/* ---- ProtectedRoute loading ---- */
+.protected-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0F4F8;
+}
+
+.protected-denied {
+  padding: 2rem;
+}

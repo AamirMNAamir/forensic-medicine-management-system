@@ -1,0 +1,181 @@
+/* ============================================================
+   PatientView.css
+   ============================================================ */
+
+.patient-view {}
+
+.patient-view__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Card */
+.patient-view__card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+  box-shadow: 0 2px 8px rgba(11, 60, 93, 0.08);
+  overflow: hidden;
+}
+
+.patient-view__card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #dde3ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbfc;
+}
+
+.patient-view__card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B3C5D;
+  margin: 0;
+}
+
+.patient-view__card-body {
+  padding: 1.25rem;
+}
+
+/* Profile table */
+.patient-view__info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.patient-view__info-table td {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f5f5f5;
+  vertical-align: top;
+}
+
+.patient-view__info-table tr:last-child td {
+  border-bottom: none;
+}
+
+.patient-view__info-label {
+  color: #6b7a8d;
+  width: 140px;
+  font-weight: 500;
+  padding-right: 1rem;
+}
+
+.patient-view__info-value {
+  color: #1a2533;
+  font-weight: 400;
+}
+
+/* Edit button */
+.patient-view__edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  background: #328CC1;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.patient-view__edit-btn:hover {
+  background: #2577a8;
+  color: #fff;
+}
+
+/* Add case button */
+.patient-view__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  background: #0B3C5D;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.patient-view__add-btn:hover {
+  background: #072d45;
+  color: #fff;
+}
+
+/* Cases table */
+.patient-view__cases-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.patient-view__cases-table thead th {
+  background: #f1f5f9;
+  color: #0B3C5D;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 2px solid #dde3ea;
+  text-align: left;
+}
+
+.patient-view__cases-table tbody td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.patient-view__cases-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.patient-view__cases-table a {
+  color: #328CC1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.patient-view__cases-table a:hover {
+  color: #0B3C5D;
+}
+
+.patient-view__no-cases {
+  font-size: 13px;
+  color: #6b7a8d;
+}
+
+/* Back button */
+.patient-view__back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 1rem;
+  background: transparent;
+  color: #0B3C5D;
+  border: 1.5px solid #0B3C5D;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 1.25rem;
+  transition: all 0.15s;
+}
+
+.patient-view__back-btn:hover {
+  background: #0B3C5D;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .patient-view__grid {
+    grid-template-columns: 1fr;
+  }
+}

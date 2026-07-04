@@ -1,11 +1,13 @@
+import './StaffList.css';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { Loading, Empty } from '../components/UI';
+import { PERMISSIONS } from '../config/rbac';
 
 export default function StaffList() {
-  const { hasRole } = useAuth();
+  const { hasPermission } = useAuth();
   const [staff, setStaff] = useState(null);
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -67,7 +69,7 @@ export default function StaffList() {
           </div>
         </div>
 
-        {hasRole(1, 2) && (
+        {hasPermission(PERMISSIONS.STAFF_WRITE) && (
           <div className="card">
             <div className="card-header"><h3>Add Doctor / Staff</h3></div>
             <div className="card-body">

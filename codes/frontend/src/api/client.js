@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const api = axios.create({ baseURL: API_URL });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('fmdms_token');
+  const token = localStorage.getItem('fmdms_token') || sessionStorage.getItem('fmdms_token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
@@ -16,6 +16,8 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('fmdms_token');
       localStorage.removeItem('fmdms_user');
+      sessionStorage.removeItem('fmdms_token');
+      sessionStorage.removeItem('fmdms_user');
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
