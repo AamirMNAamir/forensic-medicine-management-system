@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
 
 const authRoutes = require('./routes/auth');
 const patientsRoutes = require('./routes/patients');
@@ -19,11 +20,49 @@ const usersRoutes = require('./routes/users');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:5173' }));
+// Trust reverse proxy (needed when deployed behind nginx, Railway, Render, etc.)
+app.set('trust proxy', 1);
+
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173'
+}));
+
 app.use(express.json());
+
+// Rate limiter for login
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    error: 'Too many login attempts. Please try again later.'
+  }
+});
+
+// Rate limiter for registration
+const registerLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    error: 'Too many registration attempts. Please try again later.'
+  }
+});
+
+// Apply rate limiting before auth routes
+app.use('/api/auth/login', loginLimiter);
+app.use('/api/auth/register', registerLimiter);
+
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-app.get('/api/health', (req, res) => res.json({ status: 'ok', service: 'FMDMS API' }));
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'FMDMS API'
+  });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientsRoutes);
@@ -39,12 +78,19 @@ app.use('/api/audit', auditRoutes);
 app.use('/api/users', usersRoutes);
 
 // 404 handler
-app.use('/api', (req, res) => res.status(404).json({ error: 'Endpoint not found.' }));
+app.use('/api', (req, res) => {
+  res.status(404).json({
+    error: 'Endpoint not found.'
+  });
+});
 
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: 'Internal server error.' });
+
+  res.status(500).json({
+    error: 'Internal server error.'
+  });
 });
 
 app.listen(PORT, () => {
