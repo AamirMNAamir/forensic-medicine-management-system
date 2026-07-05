@@ -1,4 +1,13 @@
 require('dotenv').config();
+
+// Fail fast if JWT secret is missing or too weak
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32) {
+  console.error(
+    'FATAL: JWT_SECRET is missing or too short (must be at least 32 characters). Set it in .env before starting the server.'
+  );
+  process.exit(1);
+}
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
