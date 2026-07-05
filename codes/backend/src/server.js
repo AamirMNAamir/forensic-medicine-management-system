@@ -12,6 +12,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const authRoutes = require('./routes/auth');
 const patientsRoutes = require('./routes/patients');
@@ -29,8 +30,11 @@ const usersRoutes = require('./routes/users');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Trust reverse proxy (needed when deployed behind nginx, Railway, Render, etc.)
+// Trust reverse proxy
 app.set('trust proxy', 1);
+
+// Secure HTTP headers
+app.use(helmet());
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN || 'http://localhost:5173'
