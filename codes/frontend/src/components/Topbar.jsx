@@ -43,8 +43,12 @@ export default function Topbar({ title, breadcrumb }) {
         </div>
       </div>
       <div className="topbar-right">
-        <Link to="/notifications" className="notif-btn">
-          &#128276;
+        <Link
+          to="/notifications"
+          className="notif-btn"
+          aria-label={unreadCount > 0 ? `Notifications, ${unreadCount} unread` : 'Notifications'}
+        >
+          <span aria-hidden="true">&#128276;</span>
           {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
         </Link>
         <div className="topbar-user">
