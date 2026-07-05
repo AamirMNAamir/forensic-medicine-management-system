@@ -30,7 +30,7 @@ export default function Sidebar() {
       <div className="sidebar-section"><span>Main</span></div>
       <nav>
         <NavLink to="/dashboard" className={linkClass}>
-          <span className="nav-icon">&#9632;</span> Dashboard
+          <span className="nav-icon" aria-hidden="true">&#9632;</span> Dashboard
         </NavLink>
       </nav>
 
@@ -40,27 +40,27 @@ export default function Sidebar() {
           <nav>
             {showPatients && (
               <NavLink to="/patients" className={linkClass}>
-                <span className="nav-icon">&#128100;</span> Patients
+                <span className="nav-icon" aria-hidden="true">&#128100;</span> Patients
               </NavLink>
             )}
             {showCases && (
               <NavLink to="/cases" className={linkClass}>
-                <span className="nav-icon">&#128193;</span> Cases
+                <span className="nav-icon" aria-hidden="true">&#128193;</span> Cases
               </NavLink>
             )}
             {showPostmortem && (
               <NavLink to="/postmortems" className={linkClass}>
-                <span className="nav-icon">&#9877;</span> Postmortem
+                <span className="nav-icon" aria-hidden="true">&#9877;</span> Postmortem
               </NavLink>
             )}
             {showEvidence && (
               <NavLink to="/evidence" className={linkClass}>
-                <span className="nav-icon">&#128230;</span> Evidence
+                <span className="nav-icon" aria-hidden="true">&#128230;</span> Evidence
               </NavLink>
             )}
             {showReports && (
               <NavLink to="/reports" className={linkClass}>
-                <span className="nav-icon">&#128196;</span> Reports
+                <span className="nav-icon" aria-hidden="true">&#128196;</span> Reports
               </NavLink>
             )}
           </nav>
@@ -73,12 +73,12 @@ export default function Sidebar() {
           <nav>
             {showPolice && (
               <NavLink to="/police" className={linkClass}>
-                <span className="nav-icon">&#128737;</span> Police Requests
+                <span className="nav-icon" aria-hidden="true">&#128737;</span> Police Requests
               </NavLink>
             )}
             {showStaff && (
               <NavLink to="/staff" className={linkClass}>
-                <span className="nav-icon">&#129658;</span> Doctors / Staff
+                <span className="nav-icon" aria-hidden="true">&#129658;</span> Doctors / Staff
               </NavLink>
             )}
           </nav>
@@ -88,29 +88,31 @@ export default function Sidebar() {
       <div className="sidebar-section"><span>System</span></div>
       <nav>
         <NavLink to="/notifications" className={linkClass}>
-          <span className="nav-icon">&#128276;</span> Notifications
+          <span className="nav-icon" aria-hidden="true">&#128276;</span> Notifications
         </NavLink>
+
         {showAuditLog && (
-          <>
-            <NavLink to="/audit-log" className={linkClass}>
-              <span className="nav-icon">&#128203;</span> Audit Log
-            </NavLink>
-          </>
+          <NavLink to="/audit-log" className={linkClass}>
+            <span className="nav-icon" aria-hidden="true">&#128203;</span> Audit Log
+          </NavLink>
         )}
+
         {showUsers && (
-          <>
-            <NavLink to="/users" className={linkClass}>
-              <span className="nav-icon">&#128101;</span> User Management
-            </NavLink>
-          </>
+          <NavLink to="/users" className={linkClass}>
+            <span className="nav-icon" aria-hidden="true">&#128101;</span> User Management
+          </NavLink>
         )}
+
         <NavLink to="/profile" className={linkClass}>
-          <span className="nav-icon">&#9881;</span> Profile
+          <span className="nav-icon" aria-hidden="true">&#9881;</span> Profile
         </NavLink>
       </nav>
 
       <div className="sidebar-footer">
-        Logged in as<br /><strong style={{ color: '#fff' }}>{user.full_name}</strong><br />
+        Logged in as
+        <br />
+        <strong style={{ color: '#fff' }}>{user.full_name}</strong>
+        <br />
         {user.role_name}
       </div>
     </aside>
