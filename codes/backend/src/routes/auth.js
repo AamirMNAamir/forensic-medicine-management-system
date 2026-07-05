@@ -134,6 +134,15 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ error: 'Username, password, full name, and role are required.' });
   }
 
+  // Public self-registration must never grant privileged roles.
+  // Only an authenticated Admin (using requireAuth+requireRole on a separate
+  // /api/users route) should be able to assign role_id 1 (Admin).
+  const RESTRICTED_ROLE_IDS = [1]; // System Administrator
+  const isAdminRequest = req.user && req.user.role_id === 1;
+  if (RESTRICTED_ROLE_IDS.includes(parseInt(role_id)) && !isAdminRequest) {
+    return res.status(403).json({ error: 'This role cannot be self-assigned during registration.' });
+  }
+
   try {
     // Check if role exists
     const [roles] = await pool.query('SELECT role_id FROM roles WHERE role_id = ?', [role_id]);
