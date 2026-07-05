@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import ConfirmDialog from '../components/ConfirmDialog';
 import api from '../api/client';
 import { Loading, StatusBadge, fmtDate } from '../components/UI';
 
@@ -13,7 +14,7 @@ export default function UsersList() {
   // Form states
   const [editMode, setEditMode] = useState(false); // false = list/create, true = edit
   const [selectedUser, setSelectedUser] = useState(null);
-  
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -29,6 +30,10 @@ export default function UsersList() {
     newPassword: '',
     show: false
   });
+
+  // Delete confirmation dialog state
+  const [deleteTarget, setDeleteTarget] = useState(null); // { user_id, username } | null
+  const [deleting, setDeleting] = useState(false);
 
   function loadUsers() {
     setLoading(true);
@@ -87,7 +92,7 @@ export default function UsersList() {
         });
         setSuccess('User created successfully.');
       }
-      
+
       // Reset form
       setFormData({
         username: '',
@@ -131,18 +136,35 @@ export default function UsersList() {
     });
   }
 
-  async function handleDelete(userId, username) {
-    if (!window.confirm(`Are you sure you want to delete user "${username}"?`)) return;
+  // Opens the confirm dialog instead of window.confirm
+  function handleDeleteClick(userId, username) {
+    setError('');
+    setSuccess('');
+    setDeleteTarget({ user_id: userId, username });
+  }
+
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+    const { user_id, username } = deleteTarget;
+
+    setDeleting(true);
     setError('');
     setSuccess('');
 
     try {
-      await api.delete(`/users/${userId}`);
+      await api.delete(`/users/${user_id}`);
       setSuccess(`User "${username}" deleted.`);
       loadUsers();
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to delete user.');
+    } finally {
+      setDeleting(false);
+      setDeleteTarget(null);
     }
+  }
+
+  function cancelDelete() {
+    setDeleteTarget(null);
   }
 
   function handlePasswordResetClick(user) {
@@ -177,6 +199,20 @@ export default function UsersList() {
 
   return (
     <Layout title="User Management" breadcrumb="System / Users">
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title="Delete User"
+        message={
+          deleteTarget
+            ? `Are you sure you want to delete user "${deleteTarget.username}"? This action cannot be undone.`
+            : ''
+        }
+        confirmLabel={deleting ? 'Deleting...' : 'Delete User'}
+        danger
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
+
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
 
@@ -234,7 +270,7 @@ export default function UsersList() {
                               Reset PW
                             </button>
                             <button
-                              onClick={() => handleDelete(u.user_id, u.username)}
+                              onClick={() => handleDeleteClick(u.user_id, u.username)}
                               className="btn btn-sm btn-outline"
                               style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}
                             >
@@ -261,8 +297,9 @@ export default function UsersList() {
               <div className="card-body">
                 <form onSubmit={handleResetPasswordSubmit}>
                   <div className="form-group mb-2">
-                    <label>New Password *</label>
+                    <label htmlFor="new_password">New Password *</label>
                     <input
+                      id="new_password"
                       type="password"
                       required
                       minLength={6}
@@ -295,8 +332,9 @@ export default function UsersList() {
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <div className="form-group mb-1">
-                  <label>Full Name *</label>
+                  <label htmlFor="full_name">Full Name *</label>
                   <input
+                    id="full_name"
                     type="text"
                     name="full_name"
                     required
@@ -306,8 +344,9 @@ export default function UsersList() {
                 </div>
 
                 <div className="form-group mb-1">
-                  <label>Email Address</label>
+                  <label htmlFor="email">Email Address</label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     value={formData.email}
@@ -318,8 +357,9 @@ export default function UsersList() {
                 {!editMode && (
                   <>
                     <div className="form-group mb-1">
-                      <label>Username *</label>
+                      <label htmlFor="username">Username *</label>
                       <input
+                        id="username"
                         type="text"
                         name="username"
                         required
@@ -329,8 +369,9 @@ export default function UsersList() {
                     </div>
 
                     <div className="form-group mb-1">
-                      <label>Password *</label>
+                      <label htmlFor="password">Password *</label>
                       <input
+                        id="password"
                         type="password"
                         name="password"
                         required
@@ -343,8 +384,9 @@ export default function UsersList() {
                 )}
 
                 <div className="form-group mb-2">
-                  <label>Role / Assignment *</label>
+                  <label htmlFor="role_id">Role / Assignment *</label>
                   <select
+                    id="role_id"
                     name="role_id"
                     required
                     value={formData.role_id}
