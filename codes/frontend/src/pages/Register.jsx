@@ -4,6 +4,22 @@ import { useAuth } from '../context/AuthContext';
 import { Alert } from '../components/UI';
 import api from '../api/client';
 
+const getPasswordStrength = (pwd) => {
+  if (!pwd) return { score: 0, label: '', color: '#dde3ea' };
+  if (pwd.length < 6) return { score: 1, label: 'Too short (min 6 characters)', color: '#dc3545' };
+  
+  let score = 0;
+  if (/[A-Z]/.test(pwd)) score++;
+  if (/[a-z]/.test(pwd)) score++;
+  if (/[0-9]/.test(pwd)) score++;
+  if (/[^A-Za-z0-9]/.test(pwd)) score++;
+  
+  if (score <= 1) return { score: 1, label: 'Weak', color: '#dc3545' };
+  if (score === 2) return { score: 2, label: 'Fair', color: '#ffc107' };
+  if (score === 3) return { score: 3, label: 'Good', color: '#328CC1' };
+  return { score: 4, label: 'Strong', color: '#198754' };
+};
+
 export default function Register() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -13,7 +29,10 @@ export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [roleId, setRoleId] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
   // Role-specific fields
   const [slmcRegNo, setSlmcRegNo] = useState('');
@@ -142,8 +161,13 @@ export default function Register() {
     setError('');
     setSuccess('');
     
-    if (!fullName || !username || !password || !roleId || !contactNo) {
+    if (!fullName || !username || !password || !confirmPassword || !roleId || !contactNo) {
       setError('Please fill in all required fields.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
       return;
     }
 
@@ -181,19 +205,20 @@ export default function Register() {
   }
 
   return (
-    <div className="login-page" style={{ minHeight: '120vh', padding: '2rem 0' }}>
+    <div className="login-page">
       <div className="login-left">
         <div className="brand">
           <div className="brand-icon">FM</div>
           <h1>FMDMS</h1>
           <p>
-            Forensic Medicine Department Management System — secure digital records for
-            patients, postmortems, evidence and medico-legal reports.
+            Forensic Medicine Department Management System
+            <br />
+            secure digital records for patients, postmortems, evidence and medico-legal reports.
           </p>
         </div>
       </div>
       <div className="login-right">
-        <div className="login-box" style={{ maxWidth: '500px', width: '90%' }}>
+        <div className="login-box">
           <h2>Create an Account</h2>
           <p>Register as a system user.</p>
 
@@ -231,13 +256,79 @@ export default function Register() {
             
             <div className="form-group">
               <label>Password *</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-              />
+              <div className="password-input-container">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{ paddingRight: '2.5rem' }}
+                  required
+                  minLength={6}
+                />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  )}
+                </button>
+              </div>
+              {/* Password strength meter */}
+              {password && (
+                <div className="password-strength-meter">
+                  <div className="strength-bars">
+                    <div className="strength-bar" style={{ backgroundColor: getPasswordStrength(password).score >= 1 ? getPasswordStrength(password).color : '#dde3ea' }} />
+                    <div className="strength-bar" style={{ backgroundColor: getPasswordStrength(password).score >= 2 ? getPasswordStrength(password).color : '#dde3ea' }} />
+                    <div className="strength-bar" style={{ backgroundColor: getPasswordStrength(password).score >= 3 ? getPasswordStrength(password).color : '#dde3ea' }} />
+                    <div className="strength-bar" style={{ backgroundColor: getPasswordStrength(password).score >= 4 ? getPasswordStrength(password).color : '#dde3ea' }} />
+                  </div>
+                  <span className="strength-text" style={{ color: getPasswordStrength(password).color }}>
+                    {getPasswordStrength(password).label}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label>Confirm Password *</label>
+              <div className="password-input-container">
+                <input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  style={{ paddingRight: '2.5rem' }}
+                  required
+                />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showConfirmPassword ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
 
             <div className="form-group">

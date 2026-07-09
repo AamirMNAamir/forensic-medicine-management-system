@@ -296,11 +296,12 @@ select { cursor: pointer; }
 
 /* ---- LOGIN PAGE ---- */
 .login-page {
-  min-height: 100vh; display: flex;
+  height: 100vh; display: flex;
   background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 100%);
+  overflow: hidden;
 }
 .login-left {
-  flex: 1; display: flex; align-items: center; justify-content: center;
+  width: 50%; height: 100vh; display: flex; align-items: center; justify-content: center;
   padding: 3rem; color: #fff;
 }
 .login-left .brand { text-align: center; }
@@ -311,17 +312,73 @@ select { cursor: pointer; }
   font-size: 36px; font-weight: 800; margin: 0 auto 1.5rem;
 }
 .login-left h1 { font-size: 28px; font-weight: 800; margin-bottom: .5rem; }
-.login-left p  { opacity: .75; font-size: 14px; max-width: 320px; margin: 0 auto; text-align: center; }
+.login-left p  { opacity: .75; font-size: 14px; max-width: 550px; margin: 0 auto; text-align: center; }
 .login-right {
-  width: 420px; background: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  padding: 3rem 2.5rem;
+  width: 50%; height: 100vh; background: var(--white);
+  display: flex; flex-direction: column; align-items: center;
+  overflow-y: auto; padding: 3rem 2.5rem;
 }
-.login-box { width: 100%; }
+.login-box {
+  width: 100%; max-width: 480px;
+  margin: auto 0;
+}
 .login-box h2 { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: .35rem; }
 .login-box p  { color: var(--text-muted); font-size: 13px; margin-bottom: 2rem; }
 .login-box .form-group { margin-bottom: 1rem; }
 .login-box .btn { width: 100%; justify-content: center; padding: .75rem; font-size: 14px; margin-top: .5rem; }
+
+/* Password input and eye-toggle icon classes */
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none !important;
+  border: none !important;
+  cursor: pointer;
+  color: var(--text-muted) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  width: auto !important;
+  margin: 0 !important;
+  height: 100%;
+}
+.password-toggle-btn:hover {
+  color: var(--primary) !important;
+}
+
+/* Password strength meter classes */
+.password-strength-meter {
+  margin-top: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+}
+.strength-bars {
+  display: flex;
+  gap: 0.25rem;
+  width: 100%;
+}
+.strength-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #dde3ea;
+  transition: background-color 0.2s ease;
+}
+.strength-text {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: right;
+  margin-top: 0.1rem;
+}
 
 /* ---- LOADING / EMPTY ---- */
 .loading-state, .empty-state {
@@ -342,8 +399,10 @@ select { cursor: pointer; }
   .form-grid, .form-grid.cols-3 { grid-template-columns: 1fr; }
   .form-group.span-2, .form-group.span-3 { grid-column: span 1; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
+  .login-page { height: auto; overflow: visible; }
   .login-left { display: none; }
-  .login-right { width: 100%; }
+  .login-right { width: 100%; height: auto; overflow-y: visible; padding: 2rem 1.5rem; }
+  .login-box { margin: 0; }
 }
 
 /* ---- UTILS ---- */
